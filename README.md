@@ -1,1 +1,1 @@
-# arduino_smartwatch_hello_world
+# Arduino smartwatch "hello world"
