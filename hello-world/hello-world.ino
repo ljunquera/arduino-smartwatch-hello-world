@@ -1,5 +1,6 @@
 
 #include "hardware_config.h"
+#include <lvgl.h>
 
 volatile bool inputoutput_inited = false;
 
@@ -10,7 +11,7 @@ void setup() {
     NRF_POWER->GPREGRET = BOOTLOADER_ADDRESS;
     NVIC_SystemReset();
   }
-
+  display_label();
 
 }
 
@@ -58,4 +59,15 @@ void set_motor(bool state) {
     digitalWrite(VIBRATOR_OUT, LOW);
   else
     digitalWrite(VIBRATOR_OUT, HIGH);
+}
+
+void display_label() {
+
+    String LVGL_Arduino = "Hello Arduino! ";
+    LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
+  
+      /* Create simple label */
+    lv_obj_t *label = lv_label_create( lv_scr_act() );
+    lv_label_set_text( label, LVGL_Arduino.c_str() );
+    lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
 }
