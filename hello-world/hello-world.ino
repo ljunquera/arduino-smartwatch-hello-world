@@ -14,18 +14,25 @@
 const int BLINKING_LIMIT = 5;
 int blinkCount = 0;
 
+bool is_vibrate_mode = true;
+
 
 void setup() {
 
   pinMode(VIBRATOR_OUT, OUTPUT);
+  pinMode(PUSH_BUTTON_IN, INPUT);
 
 }
 
 void loop() {
 
-  digitalWrite(VIBRATOR_OUT, HIGH);  // turn the LED on (HIGH is the voltage level)
-  delay(1000);                      // wait for a second
-  digitalWrite(VIBRATOR_OUT, LOW);   // turn the LED off by making the voltage LOW
+  is_vibrate_mode = digitalRead(PUSH_BUTTON_IN);
+  if (is_vibrate_mode) {
+    digitalWrite(VIBRATOR_OUT, HIGH);  // turn the LED on (HIGH is the voltage level)
+    delay(1000);                      // wait for a second
+    digitalWrite(VIBRATOR_OUT, LOW);   // turn the LED off by making the voltage LOW    
+  }
+
   delay(1000);                      // wait for a second
 
 }
